@@ -61,7 +61,7 @@ Daria erro porque não existe o campo ' ' no model. Então o Value(' ') simula u
 
 `campos = Concat('nome', Value(' '), 'sobrenome', Value(' '), 'telefone')`
 
-### _**(4) - Esse annotate vai criar uma variável que guarda a concatenação dos campos para filtrar por essa variável o termo parcial ou total, escrito no formulário.
+### _**(4) - Esse annotate vai criar uma variável que guarda a concatenação dos campos para filtrar por essa variável o termo parcial ou total, escrito no formulário.**_
 
 `contatos = Contato.objects.annotate(
     nome_completo=campos
