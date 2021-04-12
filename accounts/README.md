@@ -1,7 +1,7 @@
- #ANOTAÇÕES APP ACCOUNTS  
+ # ANOTAÇÕES APP ACCOUNTS  
 
  
-> ##**ARQUIVO views.py:** 
+> ## **ARQUIVO views.py:** 
 
 ### _**(1) - É importante que o app de contas de usuários receba o nome de "accounts".**_
 Eu tinha colocado "contas" e ficou dando um erro de caminho na parte do dashboard, que teria que redirecionar pra página de login, caso o login não tivesse sido feito.
