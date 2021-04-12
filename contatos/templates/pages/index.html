@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+
+{% block 'conteudo' %}
+
+    <br>
+        <form method="get" action="{% url 'busca' %}">
+          <div class="form-group row">
+            <div class="col-12">
+              <input class="form-control"
+                     type="search" value="{{ request.GET.termo }}"
+                     id="search-input"
+                     placeholder="Digite sua pesquisa"
+                     name="termo">
+
+
+            </div>
+          </div>
+        </form>
+        <!-- request.GET.termo para pegar o valor da requisição e deixar a mostra no formulário -->
+
+    <!-- Para aparecer a mensagem
+    {% if messages %}
+        {% for message in messages %}
+
+            {{ message }} {{ message.tags }} - para exibir qual a mensagem
+
+        {% endfor %}
+    {% endif %}
+    -->
+
+    <h1 class="mt-5">Minha agenda</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Telefone</th>
+                <th>Categoria</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contato in contatos%}
+                <!-- {% if contato.mostrar %} se contato.mostrar == true, mostre na tela pela, fazendo pelo html -->
+                    <tr>
+                        <td>{{contato.id}}</td>
+                        <td>
+                        <a href="{% url 'detalhes' contato_id=contato.id %}"> {{contato.nome}}</a>
+                        </td>
+                        <td>{{contato.sobrenome}}</td>
+                        <td>{{contato.telefone}}</td>
+                        <td>{{contato.categoria}}</td>
+                    </tr>
+                <!--{% endif %}-->
+            {% endfor %}
+        </tbody>
+    </table>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        {% for pagina in contatos.paginator.page_range %}
+            {% if contatos.number == pagina %}
+                <li class="page-item active">
+                    <a class="page-link" href="?p={{ pagina }}&termo={{ request.GET.termo }}">{{ pagina }}</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?p={{ pagina }}&termo={{ request.GET.termo }}">{{ pagina }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+
+<!-- 
+    {% if page_obj.has_previous %}
+        <a href="?p=1">&laquo; first</a>
+        <a href="?p={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+        <a href="?p={{ page_obj.next_page_number }}">next</a>
+        <a href="?p={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+-->
+{% endblock %}
